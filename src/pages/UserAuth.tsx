@@ -1,8 +1,15 @@
+import { useState } from "react"
 import LoginForm from "../components/LoginForm"
-// import RegisterForm from "../components/RegisterForm"
+import RegisterForm from "../components/RegisterForm"
 import '../styles/UserAuth.css'
 
 const UserAuth = () => {
+  const [showLoginForm, setShowLoginForm] = useState(true);
+
+  const toggleForms = () => {
+    setShowLoginForm(!showLoginForm);
+  };
+
   return (
     <> 
     <div className="main-container">
@@ -15,8 +22,10 @@ const UserAuth = () => {
       </div>
       <div className="half left">
         <div className="form-container">
-          <LoginForm></LoginForm>
-          {/* <RegisterForm /> */}
+          { showLoginForm ? <LoginForm toggle={toggleForms} /> 
+          : <RegisterForm toggle={toggleForms} /> 
+          }
+          
         </div>
       </div>
     </div>

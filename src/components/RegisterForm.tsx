@@ -1,4 +1,8 @@
-const RegisterForm = () => {
+type RegisterProps = {
+  toggle: () => void;
+}
+
+const RegisterForm = (props: RegisterProps) => {
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -72,7 +76,7 @@ const RegisterForm = () => {
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             Already have an account?{' '}
-            <a href="#" className="font-semibold text-dark-brown hover:text-brown-secondary ">
+            <a href="#" onClick={props.toggle} className="font-semibold text-dark-brown hover:text-brown-secondary ">
               Login
             </a>
           </p>
