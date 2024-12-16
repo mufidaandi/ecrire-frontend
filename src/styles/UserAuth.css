@@ -16,16 +16,7 @@
     width: 50%;
 }
 
-.logo {
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
 
-.logo img {
-    width: 60%;
-    margin: auto;
-  }
 
 .left, .container {
     display: flex;
