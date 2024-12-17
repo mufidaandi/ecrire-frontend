@@ -12,7 +12,7 @@ This is a journaling app built with **React**, **Vite**, **TypeScript**, and **T
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/journaling-app.git
+   git clone https://github.com/mufidaandi/ecrire-frontend.git
 2. **Navigate to the project directory**:
    ```bash
    cd journaling-app
