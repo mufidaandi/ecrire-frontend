@@ -2,15 +2,30 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import JournalEntry from "../components/JournalEntry";
 import SearchBar from "../components/SearchBar";
+import axios from "axios";
 
 const Home = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
     const fetchAllEntries = async () => {
-      const result = await fetch("http://localhost:8080/entry");
-      const jsonResult = await result.json();
-      setEntries(jsonResult);
+      const config = {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      };
+      axios.get('http://localhost:8080/entry',config)
+      .then(response => {
+        setEntries(response.data); // Set the fetched data
+          //setLoading(false); // Set loading to false
+      })
+      .catch(error => {
+        console.log(error);
+          // setError(error); // Handle errors
+          // setLoading(false); // Set loading to false
+      });
+      // const result = await fetch("http://localhost:8080/entry");
+      // const jsonResult = await result.json();
+      // setEntries(jsonResult);
+      console.log("fetching");
     };
     fetchAllEntries();
   }, []);

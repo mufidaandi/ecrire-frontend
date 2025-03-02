@@ -1,8 +1,35 @@
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 type RegisterProps = {
   toggle: () => void;
 }
 
 const RegisterForm = (props: RegisterProps) => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (target) => {
+    console.log('submnitted');
+    target.preventDefault();
+    const postjson = {
+      ...{username},
+      ...{email},
+      ...{password}
+    }
+    console.log(postjson);
+    try {
+      const response = await axios.post("http://localhost:8080/auth/signup", postjson);
+      console.log("Response:", response.data);
+      //localStorage.setItem('token', response.data); 
+      navigate('/auth');
+    } catch (error) {
+      console.error("Login Failed : Error:", error);
+    }
+  };
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -13,7 +40,7 @@ const RegisterForm = (props: RegisterProps) => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
           <div>
               <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">
                 Username
@@ -23,6 +50,8 @@ const RegisterForm = (props: RegisterProps) => {
                   id="username"
                   name="username"
                   type="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   required
                   autoComplete="username"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-brown-secondary sm:text-sm/6"
@@ -39,6 +68,8 @@ const RegisterForm = (props: RegisterProps) => {
                   id="email"
                   name="email"
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   autoComplete="email"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-brown-secondary sm:text-sm/6"
@@ -57,6 +88,8 @@ const RegisterForm = (props: RegisterProps) => {
                   id="password"
                   name="password"
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                   autoComplete="current-password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-brown-secondary sm:text-sm/6"
