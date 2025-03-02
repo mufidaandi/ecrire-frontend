@@ -15,16 +15,10 @@ const Home = () => {
       axios.get('http://localhost:8080/entry',config)
       .then(response => {
         setEntries(response.data); // Set the fetched data
-          //setLoading(false); // Set loading to false
       })
       .catch(error => {
         console.log(error);
-          // setError(error); // Handle errors
-          // setLoading(false); // Set loading to false
       });
-      // const result = await fetch("http://localhost:8080/entry");
-      // const jsonResult = await result.json();
-      // setEntries(jsonResult);
       console.log("fetching");
     };
     fetchAllEntries();
