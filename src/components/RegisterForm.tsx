@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FormEvent } from 'react';
+
 
 type RegisterProps = {
   toggle: () => void;
@@ -12,9 +14,9 @@ const RegisterForm = (props: RegisterProps) => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (target) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     console.log('submnitted');
-    target.preventDefault();
+    event.preventDefault();
     const postjson = {
       ...{username},
       ...{email},
